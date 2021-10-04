@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { ChangeEvent, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [value, setValue] = useState("");
+
+  const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    console.log(evt.target.validity.tooShort);
+    setValue(evt.target.value);
+  };
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <input type="text" value={value} minLength={2} onChange={onChange} data-testid="input-test-field" />
+      </form>
     </div>
   );
 }
